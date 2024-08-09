@@ -1,7 +1,6 @@
 import React from 'react';
-import { View, Text, StyleSheet, useWindowDimensions, Platform } from 'react-native';
+import { View, Text, StyleSheet, useWindowDimensions } from 'react-native';
 import { RouteProp } from '@react-navigation/native';
-import DeviceInfo from 'react-native-device-info';
 import { RootStackParamList } from '../types/root';
 
 type DetailsViewScreenRouteProp = RouteProp<RootStackParamList, 'DetailsView'>;
@@ -14,20 +13,21 @@ const DetailsViewScreen = ({ route }: Props) => {
   const { item } = route.params;
   const { width, height } = useWindowDimensions();
   const isLandscape = width > height;
-  const isTablet = Platform.OS === 'ios' || Platform.OS === 'android';
-  // const isTablet = DeviceInfo.isTablet();  
-
-
+  const isTablet = width >= 768 || height >= 768;
+ 
   return (
-    <View style={[styles.container, isLandscape && styles.landscapeContainer]}>
-      <View style={[styles.card, isLandscape && isTablet && styles.landscapeCard]}>
+    <View style={[styles.container, isLandscape && isTablet && styles.landscapeTabletContainer]}>
+      <View style={[styles.card, isLandscape && isTablet && styles.landscapeTabletCard]}>
         <Text style={styles.title}>{item.name}</Text>
-        {item.data &&
-          Object.entries(item.data).map(([key, value]) => (
-            <View key={key} style={styles.detailContainer}>
-              <Text style={styles.detail}>{key}: {value}</Text>
-            </View>
-          ))}
+        {item.data && (
+          <View style={isLandscape && isTablet ? styles.landscapeTabletDetailsGrid : styles.detailsColumn}>
+            {Object.entries(item.data).map(([key, value]) => (
+              <View key={key} style={styles.detailContainer}>
+                <Text style={styles.detailKey}>{key}:{String(value)}</Text>
+              </View>
+            ))}
+          </View>
+        )}
       </View>
     </View>
   );
@@ -40,11 +40,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
-  landscapeContainer: {
-    flexDirection: 'row',
+  landscapeTabletContainer: {
+    padding: 20,
   },
   card: {
     backgroundColor: '#00264d',
+    width: '90%',
     padding: 20,
     borderRadius: 10,
     shadowColor: '#000',
@@ -57,16 +58,24 @@ const styles = StyleSheet.create({
     elevation: 5,
     opacity: 0.9,
   },
-  landscapeCard: {
-    width: '80%',
-    paddingHorizontal: 30,
+  landscapeTabletCard: {
+    flexDirection: 'row',
+    width: '100%',
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
     color: '#fff',
+  },
+  detailsColumn: {
+    flexDirection: 'column',
+  },
+  landscapeTabletDetailsGrid: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   detailContainer: {
     borderWidth: 1,
@@ -74,9 +83,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
     marginVertical: 5,
+    width: '100%',
   },
-  detail: {
-    fontSize: 18,
+  detailKey: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#fff',
+  },
+  detailValue: {
+    fontSize: 17,
     color: '#fff',
   },
 });
