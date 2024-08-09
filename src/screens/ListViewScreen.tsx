@@ -42,7 +42,7 @@ const ListViewScreen = () => {
   const renderItem = ({ item }: { item: Item }) => (
     <TouchableOpacity onPress={() => navigation.navigate('DetailsView', { item })}>
       <View style={styles.item}>
-        <Text>{item.name}</Text>
+        <Text style={styles.text}>{item.name}</Text>
       </View>
     </TouchableOpacity>
   );
@@ -67,11 +67,16 @@ const styles = StyleSheet.create({
     flex:1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor:"#00264d"
   },
   item: {
     padding: 20,
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
+  },
+  text: {
+    fontSize: 18,
+    color: '#fff',
   },
 });
 

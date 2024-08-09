@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0, 0, 0, 0.5)',
   },
   card: {
-    backgroundColor: 'white',
+    backgroundColor: '#00264d',
     padding: 20,
     borderRadius: 10,
     shadowColor: '#000',
@@ -52,6 +52,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
     textAlign: 'center',
+    color: '#fff',
   },
   detailContainer: {
     borderWidth: 1,
@@ -62,6 +63,7 @@ const styles = StyleSheet.create({
   },
   detail: {
     fontSize: 18,
+    color: '#fff',
   },
 });
 
