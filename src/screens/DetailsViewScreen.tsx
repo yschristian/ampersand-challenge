@@ -23,7 +23,7 @@ const DetailsViewScreen = ({ route }: Props) => {
           <View style={isLandscape && isTablet ? styles.landscapeTabletDetailsGrid : styles.detailsColumn}>
             {Object.entries(item.data).map(([key, value]) => (
               <View key={key} style={styles.detailContainer}>
-                <Text style={styles.detailKey}>{key}:{String(value)}</Text>
+                <Text style={styles.detailKey}>{key}: {String(value)}</Text>
               </View>
             ))}
           </View>

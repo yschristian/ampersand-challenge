@@ -17,8 +17,8 @@ This project is a React Native application that fetches and displays data from a
 
 1. **Clone the repository:**
     ```
-    git clone https://github.com/yourusername/your-repo-name.git
-    cd your-repo-name
+    git clone https://github.com/yschristian/ampersand-challenge.git
+    cd ampersand-challenge
     ```
 
 2. **Install dependencies using Yarn:**
@@ -43,7 +43,3 @@ This project is a React Native application that fetches and displays data from a
 - **Expo** was used to simplify the setup and development process. Expo provides a managed workflow that handles many native configurations for you.
 - **FlatList** was used instead of `RecyclerView`, which is the native Android equivalent. This choice was made to maintain cross-platform compatibility in React Native.
 - The landscape layout was optimized for tablets by detecting screen size and orientation, ensuring a better user experience on larger screens.
-
-
-## Screenshots
-(Add screenshots of the app running on a phone and tablet in both portrait and landscape modes.)
